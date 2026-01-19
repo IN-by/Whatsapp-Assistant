@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+  <app appid='nlechbagifnaddpedbpcdkcncdhafngf'>
+    <updatecheck codebase='https://github.com/IN-by/Whatsapp-Assistant/releases/download/v1.0/extension.crx' version='1.0' />
+  </app>
+</gupdate>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>WhatsApp CRM</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+
+<body>
+  <!-- Main Content Area -->
+  <main id="main-content">
+    <!-- Home Tab -->
+    <section id="tab-home" class="tab-content active">
+      <header>
+        <h1>首页</h1>
+      </header>
+      <div class="content-body">
+        <div id="status-section" class="card">
+          <!-- Field 1: Chat Type -->
+          <div class="field">
+            <label style="font-size: 12px; color: #666; display: block; margin-bottom: 4px;">聊天类型 (Type)</label>
+            <div id="chat-type-display"
+              style="font-size: 14px; font-weight: 500; color: #333; padding-bottom: 8px; border-bottom: 1px solid #eee;">
+              -</div>
+          </div>
+
+          <!-- Field 2: Chat ID -->
+          <div class="field" style="margin-top: 12px;">
+            <label style="font-size: 12px; color: #666; display: block; margin-bottom: 4px;">聊天 ID (Chat ID)</label>
+            <div id="chat-id-display"
+              style="font-size: 14px; font-weight: 500; color: #333; padding-bottom: 8px; border-bottom: 1px solid #eee;">
+              -</div>
+          </div>
+
+          <!-- Field 3: Contact Info -->
+          <div class="field" style="margin-top: 12px;">
+            <label style="font-size: 12px; color: #666; display: block; margin-bottom: 4px;">联系信息 (Name/Phone)</label>
+            <div id="chat-info-display" style="font-size: 16px; font-weight: bold; color: #000; padding-bottom: 8px;">-
+            </div>
+          </div>
+
+          <p style="margin-top: 8px; font-size: 12px; color: #999;">Status: <span id="status">Initializing...</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Tab -->
+    <section id="tab-customer" class="tab-content">
+      <header style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>客户信息</h1>
+        <div class="header-actions">
+          <button id="btn-refresh-customer" class="icon-btn" title="刷新数据">
+            <img src="assets/icons/restart-line.svg" alt="Refresh">
+          </button>
+        </div>
+      </header>
+      <div class="content-body">
+
+        <!-- Loading State -->
+        <div id="customer-loading" class="card hidden" style="text-align: center; color: #666;">
+          <p>正在查询客户数据...</p>
+        </div>
+
+        <!-- State A: Data Found -->
+        <div id="customer-data" class="card hidden">
+          <!-- Name -->
+          <div class="field">
+            <label>姓名</label>
+            <div id="crm-name" class="value-text">-</div>
+          </div>
+
+          <!-- Source & Country (Row) -->
+          <div class="row" style="display: flex; gap: 12px; margin-top: 12px;">
+            <div class="field" style="flex: 1;">
+              <label>来源</label>
+              <div id="crm-source" class="value-text">-</div>
+            </div>
+            <div class="field" style="flex: 1;">
+              <label>国家</label>
+              <div id="crm-country" class="value-text">-</div>
+            </div>
+          </div>
+
+          <!-- Rating -->
+          <div class="field" style="margin-top: 12px;">
+            <label>客户评级</label>
+            <div id="crm-rating" class="star-rating">
+              <!-- JS will inject stars here -->
+            </div>
+          </div>
+
+          <!-- Evaluation -->
+          <div class="field" style="margin-top: 12px;">
+            <label>客户评价</label>
+            <div id="crm-evaluation" class="value-text" style="white-space: pre-wrap;">-</div>
+          </div>
+
+          <!-- Salesperson & Time (Row) -->
+          <div class="row" style="display: flex; gap: 12px; margin-top: 12px;">
+            <div class="field" style="flex: 1;">
+              <label>业务员</label>
+              <div id="crm-salesperson" class="value-text">-</div>
+            </div>
+            <div class="field" style="flex: 1;">
+              <label>记录时间</label>
+              <div id="crm-time" class="value-text">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- State B: Not Found -->
+        <div id="customer-not-found" class="card hidden" style="text-align: center; padding: 40px 20px;">
+          <img src="assets/icons/no-data.svg" class="no-data-illustration" alt="No Data" />
+          <p class="empty-text">未找到该联系人信息</p>
+          <button id="btn-add-customer" class="action-btn primary">新增联系人</button>
+          <button id="btn-link-customer" class="action-btn secondary" style="margin-top: 8px;">关联已有联系人</button>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- Products Tab -->
+    <section id="tab-products" class="tab-content">
+      <div class="iframe-container">
+        <!-- Lazy load: URL stored in data-src, initally empty src -->
+        <iframe id="feishu-frame" data-src="https://n8n.szcardsilk.com/webhook/aa5549be-566d-4bcc-be18-de6f0aefd578"
+          src="" frameborder="0"></iframe>
+      </div>
+    </section>
+
+    <!-- Orders Tab -->
+    <section id="tab-orders" class="tab-content">
+      <header>
+        <h1>订单</h1>
+      </header>
+      <div class="content-body">
+        <p>Order History coming soon...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="home" data-icon="home">
+      <img src="assets/tabs/home-fill.svg" alt="Home" />
+    </button>
+    <button class="nav-item" data-tab="customer" data-icon="id-card">
+      <img src="assets/tabs/id-card-line.svg" alt="Customer" />
+    </button>
+    <button class="nav-item" data-tab="products" data-icon="archive-stack">
+      <img src="assets/tabs/archive-stack-line.svg" alt="Products" />
+    </button>
+    <button class="nav-item" data-tab="orders" data-icon="file-list-3">
+      <img src="assets/tabs/file-list-3-line.svg" alt="Orders" />
+    </button>
+  </nav>
+
+  <!-- Add Contact Overlay -->
+  <div id="add-contact-overlay" class="hidden">
+    <button id="btn-close-overlay" class="icon-btn"
+      style="position: absolute; top: 16px; right: 16px; background: white; z-index: 10;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 10.586L16.95 5.63599L18.364 7.04999L13.414 12L18.364 16.95L16.95 18.364L12 13.414L7.04999 18.364L5.63599 16.95L10.586 12L5.63599 7.04999L7.04999 5.63599L12 10.586Z"
+          fill="black" />
+      </svg>
+    </button>
+    <div id="overlay-loading"
+      style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+      <div class="spinning" style="margin-bottom: 8px;">
+        <img src="assets/icons/restart-line.svg" style="width: 32px; height: 32px;">
+      </div>
+      <p style="color: #666;">加载中...</p>
+    </div>
+    <iframe id="add-contact-frame" src="" frameborder="0"
+      style="width: 100%; height: 100%; background: white;"></iframe>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+
+</html>

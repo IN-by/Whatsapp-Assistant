@@ -1,0 +1,5 @@
+key.pem
+*.crx
+*.zip
+.DS_Store
+node_modules/

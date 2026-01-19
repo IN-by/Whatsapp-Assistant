@@ -1,0 +1,352 @@
+/* =========================================
+   1. CSS 变量 (Variables)
+   ========================================= */
+:root {
+  /* 标准化排版 (Standardized Typography) */
+  /* 大标题 */
+  --font-size-large-title: 20px;
+  --font-weight-large-title: 600;
+
+  /* 小标题 */
+  --font-size-subtitle: 13px;
+  --font-weight-subtitle: 600;
+
+  /* 正文 */
+  --font-size-body: 14px;
+  --font-weight-body: 400;
+
+  /* 正文加粗 */
+  --font-size-body-bold: 14px;
+  --font-weight-body-bold: 600;
+
+  /* 描述 */
+  --font-size-description: 12px;
+  --font-weight-description: 400;
+}
+
+/* =========================================
+   2. 全局样式 (Global Styles)
+   ========================================= */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  color: #111b21;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   3. 布局与容器 (Layout & Containers)
+   ========================================= */
+/* 主内容区域 */
+#main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: 80px;
+  /* 为底部导航栏留出空间 */
+}
+
+/* 标签页内容容器 */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* 头部样式 */
+header h1 {
+  font-size: var(--font-size-large-title);
+  font-weight: var(--font-weight-large-title);
+  margin: 0 0 16px 0;
+  color: #000000;
+}
+
+/* =========================================
+   4. 组件 - 卡片 (Cards)
+   ========================================= */
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* =========================================
+   5. 组件 - 字段与排版 (Fields & Typography)
+   ========================================= */
+.field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  font-size: var(--font-size-subtitle);
+  font-weight: var(--font-weight-subtitle);
+  display: block;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.value-text {
+  font-size: var(--font-size-body-bold);
+  font-weight: var(--font-weight-body-bold);
+  color: #333;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.placeholder-text {
+  font-size: var(--font-size-description);
+  font-weight: var(--font-weight-description);
+  color: #666666;
+  font-style: italic;
+}
+
+/* =========================================
+   6. 组件 - 按钮 (Buttons)
+   ========================================= */
+/* 通用操作按钮 */
+.action-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.action-btn.primary {
+  background-color: #000;
+  color: #fff;
+}
+
+.action-btn.secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+/* 图标按钮 (如刷新按钮) */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.icon-btn img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* 特定按钮: n8n 同步 */
+button#btn-sync-n8n {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+button#btn-sync-n8n:hover {
+  background-color: #333333;
+}
+
+/* =========================================
+   7. 组件 - 导航栏 (Navigation)
+   ========================================= */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 0;
+  /* 增加内边距以适应触摸 */
+  border-top: 1px solid #e0e0e0;
+  box-shadow: none;
+  z-index: 100;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #888888;
+  padding: 8px;
+  border-radius: 50%;
+  /* 触摸区域圆角 */
+  transition: background-color 0.2s;
+  width: 48px;
+  height: 48px;
+}
+
+.nav-item img {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  filter: grayscale(100%);
+  transition: transform 0.1s;
+}
+
+.nav-item.active img {
+  filter: none;
+  /* 显示原色 (黑色) */
+  transform: scale(1.1);
+  /* 轻微放大效果 */
+}
+
+.nav-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* =========================================
+   11. 叠加层 (Overlays)
+   ========================================= */
+#add-contact-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 200;
+  /* 确保在导航栏之上 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   8. 功能 - 客户信息 (Customer Info)
+   ========================================= */
+/* 星级评分 */
+.star-rating {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.star-rating img {
+  width: 16px;
+  height: 16px;
+}
+
+.star-gold {
+  /* 将黑色转换为金色的近似 SVG 滤镜 (#FFD700) */
+  filter: invert(80%) sepia(35%) saturate(867%) hue-rotate(357deg) brightness(101%) contrast(104%);
+}
+
+/* 空状态 (无数据) */
+.no-data-illustration {
+  width: 120px;
+  max-width: 100%;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.empty-text {
+  font-size: var(--font-size-description);
+  font-weight: var(--font-weight-description);
+  color: #999;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* =========================================
+   9. 功能 - 产品 (Products)
+   ========================================= */
+/* 产品标签页全屏布局覆盖 */
+#tab-products {
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  margin: -16px;
+  /* 抵消父容器的内边距 */
+  width: calc(100% + 32px);
+  height: calc(100% + 32px);
+}
+
+#tab-products.active {
+  display: flex !important;
+}
+
+.iframe-container {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+/* =========================================
+   10. 工具类与动画 (Utilities & Animations)
+   ========================================= */
+.hidden {
+  display: none !important;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 旋转动画 */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}

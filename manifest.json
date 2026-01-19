@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "WhatsApp Assistant",
+  "version": "1.0",
+  "description": "Displays CRM data and triggers AI workflows based on WhatsApp web chats.",
+  "permissions": [
+    "sidePanel",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "host_permissions": [
+    "https://web.whatsapp.com/*",
+    "https://n8n.szcardsilk.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "update_url": "https://raw.githubusercontent.com/IN-by/Whatsapp-Assistant/main/updates.xml",
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "lib/wppconnect-wa.js",
+        "injector.js"
+      ],
+      "world": "MAIN"
+    }
+  ],
+  "action": {
+    "default_title": "Open CRM Panel"
+  }
+}
