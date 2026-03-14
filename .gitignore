@@ -1,5 +1,8 @@
 key.pem
+key.pem.bak
 *.crx
 *.zip
 .DS_Store
 node_modules/
+.agent/
+.vscode/
