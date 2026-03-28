@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "WhatsApp Assistant",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Internal CRM sidebar for WhatsApp Web — quick replies, AI translation, customer lookup and product catalog for CARDSILK team.",
   "permissions": [
     "sidePanel",
