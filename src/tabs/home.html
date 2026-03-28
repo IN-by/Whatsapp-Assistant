@@ -1,0 +1,102 @@
+<header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+  <h1>快捷回复</h1>
+  <div class="header-actions" style="display: flex; gap: 8px;">
+    <button id="btn-open-doc" class="header-pill-btn secondary" title="管理语料库">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      语料库
+    </button>
+    <button id="btn-refresh-home" class="header-pill-btn secondary" title="拉取最新数据">
+      <svg class="refresh-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <polyline points="1 20 1 14 7 14"></polyline>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+      </svg>
+      <span class="btn-text">同步</span>
+    </button>
+  </div>
+</header>
+
+<div class="content-body">
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <div class="search-input-wrapper">
+      <img src="assets/tabs/file-list-3-line.svg" class="search-icon" style="opacity: 0.4; width: 14px;">
+      <input type="text" id="home-search-input" placeholder="搜索回复关键词" spellcheck="false" autocomplete="off">
+      <button id="btn-clear-search" class="clear-icon" title="清空" style="display: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Filter Bar (Horizontal Scrollable) -->
+  <div id="filter-container" class="filter-container">
+    <div id="filter-bar" class="filter-bar">
+      <!-- Chips will be injected here -->
+    </div>
+  </div>
+
+  <!-- Replies List -->
+  <div id="replies-list" class="replies-list" style="margin-bottom: 120px;">
+    <!-- Cards will be injected here -->
+  </div>
+
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast">复制成功</div>
+
+  <!-- Translation Fixed Bar -->
+  <div id="home-translation-bar" class="translation-bar">
+    <div class="translation-header">
+      <span class="translation-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"></path>
+        </svg>
+        AI 翻译
+      </span>
+      <div id="translation-lang-tabs" class="translation-lang-tabs">
+        <button class="active" data-lang="en"><span class="short">英</span><span class="full">英语</span></button>
+        <button data-lang="fr"><span class="short">法</span><span class="full">法语</span></button>
+        <button data-lang="es"><span class="short">西</span><span class="full">西班牙语</span></button>
+        <button data-lang="de"><span class="short">德</span><span class="full">德语</span></button>
+        <button data-lang="ru"><span class="short">俄</span><span class="full">俄语</span></button>
+        <button data-lang="ar"><span class="short">阿</span><span class="full">阿拉伯语</span></button>
+      </div>
+    </div>
+    <div class="translation-input-wrapper">
+      <textarea id="translation-input" placeholder="输入中文后按回车翻译，Shift+回车换行..." rows="3" autocomplete="off"></textarea>
+      <button id="translation-send-btn" class="translation-send-btn" title="点击发送或按回车">
+        <!-- SVG for rightward arrow -->
+        <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+        <!-- SVG for loading spinner (hidden initially) -->
+        <svg class="loading-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="2" x2="12" y2="6"></line>
+          <line x1="12" y1="18" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="6" y2="12"></line>
+          <line x1="18" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+          <line x1="16.24" y1="4.93" x2="19.07" y2="7.76"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

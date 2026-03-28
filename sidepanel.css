@@ -52,6 +52,24 @@ body {
   /* 为底部导航栏留出空间 */
 }
 
+/* Custom slim scrollbar for main content area */
+#main-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+#main-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#main-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+#main-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
 /* 标签页内容容器 */
 .tab-content {
   display: none;
@@ -84,23 +102,23 @@ header h1 {
    5. 组件 - 字段与排版 (Fields & Typography)
    ========================================= */
 .field {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .field label {
-  font-size: var(--font-size-subtitle);
-  font-weight: var(--font-weight-subtitle);
+  font-size: 12px;
+  font-weight: 400;
   display: block;
-  color: #000000;
+  color: #888;
   margin-bottom: 4px;
 }
 
 .value-text {
-  font-size: var(--font-size-body-bold);
-  font-weight: var(--font-weight-body-bold);
-  color: #333;
-  padding: 4px 0;
-  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  line-height: 1.4;
+  word-break: break-word;
 }
 
 .placeholder-text {
@@ -139,6 +157,13 @@ header h1 {
   opacity: 0.8;
 }
 
+/* 头部操作按钮区域 */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 按钮之间的间距 */
+}
+
 /* 图标按钮 (如刷新按钮) */
 .icon-btn {
   background: none;
@@ -160,6 +185,52 @@ header h1 {
   width: 20px;
   height: 20px;
   display: block;
+}
+
+/* Header Pill Buttons */
+.header-pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.header-pill-btn.secondary {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+.header-pill-btn.secondary:hover {
+  background-color: #e5e5e5;
+  color: #222;
+}
+
+.header-pill-btn.primary {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.header-pill-btn.primary:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.refresh-svg {
+  transition: transform 0.5s ease;
+}
+
+/* Let the rotation be handled by spinning class */
+button.spinning svg.refresh-svg {
+  animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* 特定按钮: n8n 同步 */
@@ -347,6 +418,369 @@ button#btn-sync-n8n:hover {
   }
 }
 
-.spinning {
+
+/* =========================================
+   11. 功能 - 快捷回复 (Quick Replies)
+   ========================================= */
+/* Search Bar */
+.search-container {
+  margin-bottom: 12px;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: border-color 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.search-input-wrapper:focus-within {
+  border-color: #000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.search-input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 8px;
+  font-size: 13px;
+  outline: none;
+  color: #333;
+}
+
+.search-input-wrapper input::placeholder {
+  color: #aaa;
+}
+
+.clear-icon {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.clear-icon:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 4px 0 12px 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.filter-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  padding: 0 4px; /* Add some side padding */
+}
+
+.filter-chip {
+  flex-shrink: 0; /* Important: don't let chips squash */
+  padding: 5px 12px;
+  background: #fff;
+  border-radius: 16px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  user-select: none; /* Prevent text selection while dragging */
+}
+
+.filter-chip.active {
+  background: #000;
+  color: #fff;
+  font-weight: 500;
+  border-color: #000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.replies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reply-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reply-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #ddd;
+}
+
+.reply-card:active {
+  transform: scale(0.98);
+}
+
+.reply-summary {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 6px;
+}
+
+.reply-en {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #888;
+  font-weight: 400;
+  /* Line Clamping: Limit to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reply-separator {
+  height: 1px;
+  background: #f5f5f5;
+  margin: 8px 0;
+}
+
+.reply-zh {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #333;
+  font-weight: 400;
+  margin-bottom: 6px;
+  white-space: pre-wrap; /* Preserve line breaks if any */
+  word-break: break-all; /* Ensure long words don't overflow */
+}
+
+/* =========================================
+   12. 功能 - AI 翻译 (AI Translation)
+   ========================================= */
+.translation-bar {
+  position: fixed;
+  bottom: 81px;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 16px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #f0f0f0;
+  z-index: 90;
+  box-sizing: border-box;
+}
+
+.translation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.translation-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.translation-lang-tabs {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+  border: 1px solid #eee;
+}
+
+.translation-lang-tabs button {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  color: #888;
+  padding: 2px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.translation-lang-tabs button:hover {
+  color: #333;
+}
+
+.translation-lang-tabs button.active {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.translation-lang-tabs button .full {
+  display: none;
+}
+
+.translation-lang-tabs button .short {
+  display: inline;
+}
+
+/* Responsive breakpoint to show full names when sidepanel is wide enough */
+@media screen and (min-width: 420px) {
+  .translation-lang-tabs button .short {
+    display: none;
+  }
+  .translation-lang-tabs button .full {
+    display: inline;
+  }
+}
+
+.translation-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 0 4px 0 12px; /* Reduced right padding so scrollbar is closer to edge */
+  transition: all 0.2s;
+}
+
+.translation-input-wrapper:focus-within {
+  border-color: #000;
+  background: #fff;
+}
+
+.translation-input-wrapper textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 8px 10px 0; /* right padding added, button takes rest of space */
+  font-size: 13px;
+  line-height: 1.5;
+  outline: none;
+  color: #333;
+  resize: none; /* Disable manual resize */
+  overflow-y: auto; /* Show scrollbar if max height is exceeded */
+  min-height: 78px; /* Approx 3 lines (13*1.5=19.5, 19.5*3=58.5 + 20 padding ~ 78px) */
+  max-height: 313px; /* Approx 15 lines (13*1.5=19.5, 19.5*15=292.5 + 20 padding ~ 313px) */
+  box-sizing: border-box;
+}
+
+/* Generative AI Style Send Button */
+.translation-send-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end; /* Pin to the bottom right of the textarea wrapper */
+  margin-bottom: 8px; /* small clearance from the bottom edge */
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  /* Push slightly away from the scrollbar */
+  margin-left: 4px;
+}
+
+.translation-send-btn:hover:not(:disabled) {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+.translation-send-btn:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.translation-send-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+img.spinning {
   animation: spin 1s linear infinite;
+}
+
+.translation-send-btn .loading-icon {
+  animation: spin 1s linear infinite;
+}
+
+/* Custom minimal scrollbar for textarea */
+.translation-input-wrapper textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.translation-input-wrapper textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.translation-input-wrapper textarea::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.translation-input-wrapper textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.translation-input-wrapper textarea::placeholder {
+  color: #999;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
 }

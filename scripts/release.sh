@@ -23,23 +23,37 @@ mkdir -p "$BUILD_DIR"
 # Copy files to build dir (excluding ignored ones)
 if command -v rsync >/dev/null 2>&1; then
     rsync -av --exclude 'key.pem' \
+              --exclude 'key.pem.bak' \
               --exclude 'dist' \
               --exclude 'scripts' \
               --exclude '.agent' \
               --exclude '.git' \
               --exclude '.gitignore' \
               --exclude '.DS_Store' \
+              --exclude '.vscode' \
               --exclude 'node_modules' \
+              --exclude '*.zip' \
+              --exclude '*.crx' \
+              --exclude 'update-core.sh' \
+              --exclude 'README.md' \
+              --exclude 'privacy-page' \
               . "$BUILD_DIR"
 else
     # Fallback to simple copy and remove
     cp -R . "$BUILD_DIR"
     rm -f "$BUILD_DIR/key.pem"
+    rm -f "$BUILD_DIR/key.pem.bak"
     rm -rf "$BUILD_DIR/dist"
     rm -rf "$BUILD_DIR/scripts"
     rm -rf "$BUILD_DIR/.agent"
     rm -rf "$BUILD_DIR/.git"
+    rm -rf "$BUILD_DIR/.vscode"
     rm -rf "$BUILD_DIR/node_modules"
+    rm -f "$BUILD_DIR"/*.zip
+    rm -f "$BUILD_DIR"/*.crx
+    rm -f "$BUILD_DIR/update-core.sh"
+    rm -f "$BUILD_DIR/README.md"
+    rm -rf "$BUILD_DIR/privacy-page"
 fi
 
 # Create ZIP for Web Store

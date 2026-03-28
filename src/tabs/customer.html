@@ -1,0 +1,74 @@
+<header style="display: flex; justify-content: space-between; align-items: center;">
+  <h1>客户信息</h1>
+  <div class="header-actions">
+    <button id="btn-refresh-customer" class="icon-btn" title="刷新数据">
+      <img src="assets/icons/restart-line.svg" alt="Refresh">
+    </button>
+  </div>
+</header>
+<div class="content-body">
+  <!-- Loading State -->
+  <div id="customer-loading" class="card hidden" style="text-align: center; color: #666;">
+    <p>正在查询客户数据...</p>
+  </div>
+
+  <!-- State A: Data Found -->
+  <div id="customer-data" class="card hidden">
+    <!-- Name -->
+    <div class="field">
+      <label>姓名</label>
+      <div id="crm-name" class="value-text">-</div>
+    </div>
+
+    <!-- Source & Country (Row) -->
+    <div class="row" style="display: flex; gap: 12px; margin-bottom: 16px;">
+      <div class="field" style="flex: 1; margin-bottom: 0;">
+        <label>来源</label>
+        <div id="crm-source" class="value-text">-</div>
+      </div>
+      <div class="field" style="flex: 1; margin-bottom: 0;">
+        <label>国家</label>
+        <div id="crm-country" class="value-text">-</div>
+      </div>
+    </div>
+
+    <!-- Rating -->
+    <div class="field">
+      <label>客户评级</label>
+      <div id="crm-rating" class="star-rating">
+        <!-- JS will inject stars here -->
+      </div>
+    </div>
+
+    <!-- Evaluation -->
+    <div class="field">
+      <label>客户评价</label>
+      <div id="crm-evaluation" class="value-text" style="white-space: pre-wrap;">-</div>
+    </div>
+
+    <!-- Salesperson & Time (Row) -->
+    <div class="row" style="display: flex; gap: 12px; margin-bottom: 16px;">
+      <div class="field" style="flex: 1; margin-bottom: 0;">
+        <label>业务员</label>
+        <div id="crm-salesperson" class="value-text">-</div>
+      </div>
+      <div class="field" style="flex: 1; margin-bottom: 0;">
+        <label>记录时间</label>
+        <div id="crm-time" class="value-text">-</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- State B: Not Found -->
+  <div id="customer-not-found" class="card hidden" style="text-align: center; padding: 40px 20px;">
+    <img src="assets/icons/no-data.svg" class="no-data-illustration" alt="No Data" />
+    <p class="empty-text">未找到该联系人信息</p>
+    <button id="btn-add-customer" class="action-btn primary">新增联系人</button>
+    <button id="btn-link-customer" class="action-btn secondary" style="margin-top: 8px;">关联已有联系人</button>
+  </div>
+
+  <!-- State C: No Chat Selected -->
+  <div id="customer-no-chat" class="card" style="text-align: center; padding: 40px 20px;">
+    <p class="empty-text" style="color: #666; font-size: 14px; margin-top: 20px;">请在 WhatsApp 网页版中选择一个聊天对像以显示其客户资料...</p>
+  </div>
+</div>

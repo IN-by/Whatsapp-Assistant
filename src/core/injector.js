@@ -49,7 +49,7 @@ waitForWPP().then((WPP) => {
     window.postMessage({
         type: 'WA_CRM_ERROR',
         error: 'WPP Library Load Failed'
-    }, '*');
+    }, 'https://web.whatsapp.com');
 });
 
 async function notifyContentScript(chat) {
@@ -129,5 +129,5 @@ async function notifyContentScript(chat) {
     window.postMessage({
         type: 'WA_CRM_CHAT_ID_UPDATE',
         payload: payload
-    }, '*');
+    }, 'https://web.whatsapp.com');
 }
